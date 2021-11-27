@@ -23,6 +23,11 @@ class DemoKeyboardActionHandler: StandardKeyboardActionHandler {
     // MARK: - Overrides
     
     override func action(for gesture: KeyboardGesture, on action: KeyboardAction) -> GestureAction? {
+        switch action {
+        case .character(let char): print("Action \(char) with \(gesture)")
+        default: print("Other")
+        }
+    
         if gesture == .longPress, let action = longPressAction(for: action) { return action }
         if gesture == .tap, let action = tapAction(for: action) { return action }
         return super.action(for: gesture, on: action)
@@ -38,6 +43,10 @@ class DemoKeyboardActionHandler: StandardKeyboardActionHandler {
     func tapAction(for action: KeyboardAction) -> GestureAction? {
         switch action {
         case .image(_, _, let imageName): return { [weak self] _ in self?.copyImage(UIImage(named: imageName)!) }
+        case .character(let char): do {
+            print("Tapped character: \(char)")
+            return nil
+        }
         default: return nil
         }
     }
@@ -98,7 +107,7 @@ private extension UIImage {
 private class ImageService: NSObject {
     
     public typealias Completion = (Error?) -> Void
-
+    
     public static private(set) var `default` = ImageService()
     
     private var completions = [Completion]()

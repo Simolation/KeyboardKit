@@ -8,7 +8,6 @@
 
 import UIKit
 import KeyboardKit
-import KeyboardKitPro
 import SwiftUI
 import Combine
 
@@ -30,7 +29,7 @@ import Combine
  To use this keyboard, you must enable it in system settings
  ("Settings/General/Keyboards"). It needs full access if you
  want to enable haptic and audio feedback.
-
+-
  `IMPORTANT` The `KeyboardView` has many environment objects
  that make it automatically update when these objects change.
  The `KeyboardViewController` will not trigger these changes
@@ -107,8 +106,8 @@ class KeyboardViewController: KeyboardInputViewController {
         
         // Setup the extension to use the keyboardView below,
         // either without or with Pro enabled.
-        // setup(with: keyboardView)
-        try? setupPro(withLicenseKey: "299B33C6-061C-4285-8189-90525BCAF098", view: keyboardView)
+        setup(with: keyboardView)
+        // try? setupPro(withLicenseKey: "299B33C6-061C-4285-8189-90525BCAF098", view: keyboardView)
     }
     
     
